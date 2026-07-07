@@ -10,8 +10,23 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
-    runs-on: windows-latest
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows
+            ext: .exe
+            build_name: Claude-API-Switcher
+          - os: macos-latest
+            name: macos
+            ext: ""
+            build_name: Claude-API-Switcher
+          - os: ubuntu-latest
+            name: linux
+            ext: ""
+            build_name: Claude-API-Switcher
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -31,23 +46,66 @@ jobs:
         run: |
           pyinstaller --onefile --windowed --name "Claude-API-Switcher" app.py
 
+      - name: Rename executable
+        shell: bash
+        run: |
+          cd dist
+          if [ "${{ matrix.name }}" = "windows" ]; then
+            mv Claude-API-Switcher.exe Claude-API-Switcher-Windows.exe
+          elif [ "${{ matrix.name }}" = "macos" ]; then
+            mv Claude-API-Switcher Claude-API-Switcher-macOS
+          else
+            mv Claude-API-Switcher Claude-API-Switcher-Linux
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-api-switcher-${{ matrix.name }}
+          path: dist/Claude-API-Switcher*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
       - name: Create release info
         id: release_info
         run: |
-          if ("${{ github.ref }}" -match "refs/tags/v(.*)") {
-            $version = $matches[1]
-            echo "version=$version" >> $env:GITHUB_OUTPUT
-            echo "tag_version=${version}" >> $env:GITHUB_OUTPUT
-          }
-        shell: pwsh
+          if [[ "${{ github.ref }}" =~ refs/tags/v(.*) ]]; then
+            version="${BASH_REMATCH[1]}"
+            echo "version=$version" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/Claude-API-Switcher.exe
+          files: |
+            artifacts/claude-api-switcher-windows/*
+            artifacts/claude-api-switcher-macos/*
+            artifacts/claude-api-switcher-linux/*
           draft: false
           prerelease: false
           generate_release_notes: true
           name: Claude API Switcher ${{ steps.release_info.outputs.version }}
+          body: |
+            ## Claude API Switcher ${{ steps.release_info.outputs.version }}
+
+            ### Downloads
+            - **Windows**: `Claude-API-Switcher-Windows.exe`
+            - **macOS**: `Claude-API-Switcher-macOS`
+            - **Linux**: `Claude-API-Switcher-Linux`
+
+            ### Installation
+            1. Download the file for your operating system
+            2. Run the executable
+            3. Select your Claude Code settings file
+            4. Choose your API provider and apply changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
