@@ -23,7 +23,7 @@ if errorlevel 1 (
 )
 
 echo [2/3] Building executable...
-pyinstaller --onefile --windowed --name "Claude-API-Switcher" --add-data "app.py;." app.py
+pyinstaller --onefile --windowed --icon "CLogo.ico" --name "Claude-API-Switcher" app.py
 
 if errorlevel 1 (
     echo.

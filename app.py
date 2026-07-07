@@ -109,6 +109,14 @@ class ClaudeAPISwitcher:
         self.root.title("Claude Code API Switcher")
         self.root.geometry("650x580")
 
+        # Set window icon
+        icon_path = Path(__file__).parent / "CLogo.png"
+        if icon_path.exists():
+            try:
+                self.root.iconphoto(True, tk.PhotoImage(file=str(icon_path)))
+            except:
+                pass
+
         # Center window
         self.root.update_idletasks()
         width = 650
