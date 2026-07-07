@@ -688,50 +688,63 @@ class ClaudeAPISwitcher:
             # Developer label
             dev_label = ctk.CTkLabel(
                 footer_frame,
-                text="Made with ❤️ by ",
+                text="Made with ❤️ by Abu Ellil",
                 font=CTkFont(size=9),
                 text_color=self.COLORS["gray"]
             )
             dev_label.pack(side="left", padx=5)
 
-            # YouTube button
-            youtube_btn = ctk.CTkButton(
+            # GitHub button
+            github_btn = ctk.CTkButton(
                 footer_frame,
-                text="📺 YouTube",
-                width=80,
+                text="🐙 GitHub",
+                width=75,
                 height=28,
                 font=CTkFont(size=9),
-                fg_color="#FF0000",
-                hover_color="#CC0000",
-                command=lambda: self.open_url("https://youtube.com/@YOUR_CHANNEL")
+                fg_color="#333333",
+                hover_color="#242424",
+                command=lambda: self.open_url("https://github.com/Abu-ellil")
             )
-            youtube_btn.pack(side="left", padx=3)
+            github_btn.pack(side="left", padx=2)
 
             # Discord button
             discord_btn = ctk.CTkButton(
                 footer_frame,
                 text="💬 Discord",
-                width=80,
+                width=75,
                 height=28,
                 font=CTkFont(size=9),
                 fg_color="#5865F2",
                 hover_color="#4752C4",
-                command=lambda: self.open_url("https://discord.gg/YOUR_INVITE")
+                command=lambda: self.open_url("https://discord.gg/U22Yks4RAj")
             )
-            discord_btn.pack(side="left", padx=3)
+            discord_btn.pack(side="left", padx=2)
 
-            # Telegram button
-            telegram_btn = ctk.CTkButton(
+            # YouTube button
+            youtube_btn = ctk.CTkButton(
                 footer_frame,
-                text="✈️ Telegram",
-                width=85,
+                text="📺 YouTube",
+                width=75,
                 height=28,
                 font=CTkFont(size=9),
-                fg_color="#0088cc",
-                hover_color="#006699",
-                command=lambda: self.open_url("https://t.me/YOUR_CHANNEL")
+                fg_color="#FF0000",
+                hover_color="#CC0000",
+                command=lambda: self.open_url("https://www.youtube.com/@LocalBenchAi")
             )
-            telegram_btn.pack(side="left", padx=3)
+            youtube_btn.pack(side="left", padx=2)
+
+            # LinkedIn button
+            linkedin_btn = ctk.CTkButton(
+                footer_frame,
+                text="💼 LinkedIn",
+                width=80,
+                height=28,
+                font=CTkFont(size=9),
+                fg_color="#0077B5",
+                hover_color="#005885",
+                command=lambda: self.open_url("https://www.linkedin.com/in/abu-ellil/")
+            )
+            linkedin_btn.pack(side="left", padx=2)
 
         else:
             # For regular tkinter
