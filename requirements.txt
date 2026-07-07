@@ -1,0 +1,8 @@
+# Claude Code API Switcher - Requirements
+
+# GUI Framework (optional - for modern dark theme)
+customtkinter>=5.2.0
+
+# For building executable
+pyinstaller>=6.0.0
+      
