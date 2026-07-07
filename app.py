@@ -746,6 +746,19 @@ class ClaudeAPISwitcher:
             )
             linkedin_btn.pack(side="left", padx=2)
 
+            # WhatsApp button
+            whatsapp_btn = ctk.CTkButton(
+                footer_frame,
+                text="📱 WhatsApp",
+                width=85,
+                height=28,
+                font=CTkFont(size=9),
+                fg_color="#25D366",
+                hover_color="#128C7E",
+                command=lambda: self.open_url("https://wa.me/201221089249")
+            )
+            whatsapp_btn.pack(side="left", padx=2)
+
         else:
             # For regular tkinter
             footer_frame = ttk.Frame(parent)
