@@ -59,7 +59,7 @@ class ClaudeAPISwitcher:
     DEFAULT_PROVIDERS = [
         ProviderConfig("zai", "Z.AI API", "https://api.z.ai/api/anthropic",
                        "Z.AI Configuration", "#9C27B0"),
-        ProviderConfig("lmstudio", "LM Studio", "http://localhost:1234/v1",
+        ProviderConfig("lmstudio", "LM Studio", "http://localhost:1234",
                        "Local Server (Port 1234)", "#FF5722"),
         ProviderConfig("ollama", "Ollama", "http://localhost:11434/v1",
                        "Local Server (Port 11434)", "#795548"),
