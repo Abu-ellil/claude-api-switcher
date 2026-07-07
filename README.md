@@ -116,6 +116,32 @@ The app looks for `settings.json` in these locations:
 - Make sure to restart Claude Code after applying changes
 - Verify the settings file path is correct
 
+### ⚠️ "Dangerous Download Blocked" Warning
+
+When downloading the `.exe` file, you may see a "Dangerous Download Blocked" warning. This is normal for unsigned executables. To proceed:
+
+#### Chrome/Edge:
+1. Click "Keep anyway" or "Allow download"
+2. Or go to Downloads → click "Keep" on the blocked file
+
+#### Windows Defender:
+1. Click "More info"
+2. Click "Run anyway"
+
+#### Why this happens?
+- The executable is not digitally signed (code signing certificates are expensive)
+- The source code is public on GitHub for verification
+- You can also build from source if you prefer
+
+#### Safer Alternative:
+Build from source code:
+```bash
+git clone https://github.com/Abu-ellil/claude-api-switcher.git
+cd claude-api-switcher
+pip install -r requirements.txt
+python app.py
+```
+
 ### 📄 License
 
 MIT License - feel free to use and modify as needed.
@@ -237,6 +263,32 @@ build.bat
 **التغييرات لا تطبق؟**
 - تأكد من إعادة تشغيل Claude Code بعد تطبيق التغييرات
 - تحقق من أن مسار ملف الإعدادات صحيح
+
+### ⚠️ تحذير "Dangerous Download Blocked"
+
+عند تحميل ملف `.exe`، قد تظهر رسالة "Dangerous Download Blocked". هذا طبيعي للملفات التنفيذية غير الموقعة. للتقدم:
+
+#### Chrome/Edge:
+1. انقر على "Keep anyway" أو "Allow download"
+2. أو اذهب إلى Downloads → انقر "Keep" على الملف المحجوب
+
+#### Windows Defender:
+1. انقر على "More info"
+2. انقر على "Run anyway"
+
+#### لماذا يحدث هذا؟
+- الملف التنفيذي غير موقّع رقمياً (شهادات التوقيع باهظة الثمن)
+- الكود المصدري متاح للعامة على GitHub للتحقق
+- يمكنك أيضاً البناء من المصدر إذا فضّلت
+
+#### البديل الأآمن:
+ابنِ من الكود المصدري:
+```bash
+git clone https://github.com/Abu-ellil/claude-api-switcher.git
+cd claude-api-switcher
+pip install -r requirements.txt
+python app.py
+```
 
 ### 📄 الترخيص
 
