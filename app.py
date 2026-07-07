@@ -672,13 +672,78 @@ class ClaudeAPISwitcher:
     def create_footer(self, parent):
         """Create footer"""
         if USE_CTK:
-            footer = ctk.CTkLabel(
+            # Warning message
+            warning = ctk.CTkLabel(
                 parent,
                 text="💡 Restart Claude Code after changing provider",
                 font=CTkFont(size=10),
                 text_color=self.COLORS["warning"]
             )
-            footer.pack(pady=(5, 15))
+            warning.pack(pady=(5, 5))
+
+            # Social links frame
+            footer_frame = ctk.CTkFrame(parent, fg_color="transparent", height=50)
+            footer_frame.pack(pady=(5, 10))
+
+            # Developer label
+            dev_label = ctk.CTkLabel(
+                footer_frame,
+                text="Made with ❤️ by ",
+                font=CTkFont(size=9),
+                text_color=self.COLORS["gray"]
+            )
+            dev_label.pack(side="left", padx=5)
+
+            # YouTube button
+            youtube_btn = ctk.CTkButton(
+                footer_frame,
+                text="📺 YouTube",
+                width=80,
+                height=28,
+                font=CTkFont(size=9),
+                fg_color="#FF0000",
+                hover_color="#CC0000",
+                command=lambda: self.open_url("https://youtube.com/@YOUR_CHANNEL")
+            )
+            youtube_btn.pack(side="left", padx=3)
+
+            # Discord button
+            discord_btn = ctk.CTkButton(
+                footer_frame,
+                text="💬 Discord",
+                width=80,
+                height=28,
+                font=CTkFont(size=9),
+                fg_color="#5865F2",
+                hover_color="#4752C4",
+                command=lambda: self.open_url("https://discord.gg/YOUR_INVITE")
+            )
+            discord_btn.pack(side="left", padx=3)
+
+            # Telegram button
+            telegram_btn = ctk.CTkButton(
+                footer_frame,
+                text="✈️ Telegram",
+                width=85,
+                height=28,
+                font=CTkFont(size=9),
+                fg_color="#0088cc",
+                hover_color="#006699",
+                command=lambda: self.open_url("https://t.me/YOUR_CHANNEL")
+            )
+            telegram_btn.pack(side="left", padx=3)
+
+        else:
+            # For regular tkinter
+            footer_frame = ttk.Frame(parent)
+            footer_frame.pack(pady=(10, 10), fill="x")
+
+            warning = ttk.Label(
+                footer_frame,
+                text="💡 Restart Claude Code after changing provider",
+                foreground="gray"
+            )
+            warning.pack(pady=5)
 
     def toggle_custom_section(self):
         """Toggle custom provider section visibility"""
@@ -825,6 +890,14 @@ class ClaudeAPISwitcher:
                 "Error",
                 f"Failed to update settings:\n\n{str(e)}"
             )
+
+    def open_url(self, url):
+        """Open URL in default browser"""
+        try:
+            import webbrowser
+            webbrowser.open(url)
+        except Exception as e:
+            print(f"Failed to open URL: {e}")
 
     def run(self):
         """Run the application"""
